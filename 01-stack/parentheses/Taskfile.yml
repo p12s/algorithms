@@ -17,10 +17,12 @@ tasks:
       - echo "Unit -v ..."
       - go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
 
+  # опасная команда - живучие процессы запускает
   unit-f:
     cmds:
       - echo "Unit -fuzz ..."
       - go test -fuzz ./...
+      # kill $(ps aux | grep 'es.test' | awk '{print $2}') - через Ctrl+C процессы не убиваются
 
   cover:
     cmds:
